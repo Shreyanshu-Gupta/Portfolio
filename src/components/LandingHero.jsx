@@ -1,149 +1,217 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import FlipInline from "./FlipInline";
 
-/* Line animation */
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.12,
-      duration: 0.55,
-      ease: "easeOut",
+      delay: i * 0.1,
+      duration: 0.6,
+      ease: [0.21, 0.47, 0.32, 0.98],
     },
   }),
 };
 
+const Typewriter = ({ words, delay = 150, pause = 2000 }) => {
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentText, setCurrentText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timeout;
+    const currentWord = words[currentWordIndex];
+
+    if (isDeleting) {
+      timeout = setTimeout(() => {
+        setCurrentText(currentWord.substring(0, currentText.length - 1));
+        if (currentText.length === 0) {
+          setIsDeleting(false);
+          setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        }
+      }, delay / 2);
+    } else {
+      timeout = setTimeout(() => {
+        setCurrentText(currentWord.substring(0, currentText.length + 1));
+        if (currentText.length === currentWord.length) {
+          timeout = setTimeout(() => setIsDeleting(true), pause);
+        }
+      }, delay);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [currentText, isDeleting, currentWordIndex, words, delay, pause]);
+
+  return (
+    <>
+      {currentText}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ repeat: Infinity, duration: 0.8 }}
+        className="inline-block w-[8px] h-[1em] bg-white align-middle ml-[1px]"
+      />
+    </>
+  );
+};
+
 export default function LandingHero() {
   return (
-    <section className="min-h-screen bg-black text-white flex items-center pt-28">
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-24 items-center">
+    <section className="relative min-h-screen flex flex-col justify-center pt-12 pb-12 overflow-hidden bg-[#09090b]">
+      {/* Subtle glowing radial background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-white/[0.03] blur-[120px] rounded-full pointer-events-none" />
+      
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
+        {/* LEFT COMPONENT */}
+        <div className="max-w-2xl lg:pl-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass mb-8"
+          >
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-xs font-medium text-gray-300 uppercase tracking-wider">
+              Available for work
+            </span>
+          </motion.div>
 
-        {/* LEFT */}
-        <div className="max-w-xl lg:pl-20">
           <motion.h1
             initial="hidden"
             animate="visible"
-            className="text-4xl md:text-6xl font-bold leading-[1.12]"
+            className="text-5xl md:text-[4rem] lg:text-[4.5rem] font-extrabold tracking-tight leading-[1.1]"
           >
-            {/* LINE 1 */}
-            <motion.div
-              variants={fadeUp}
-              custom={0}
-              className="flex items-center gap-4 mb-4"
-            >
-              <span>Turning</span>
-              <FlipInline />
+            <motion.div variants={fadeUp} custom={0} className="text-gray-400 font-medium text-xl md:text-2xl mb-4 tracking-normal">
+              Hi, I'm Shreyanshu Kumar
             </motion.div>
-
-            {/* LINE 2 */}
-            <motion.div
-              variants={fadeUp}
-              custom={1}
-              className="mb-6"
-            >
-              into real{" "}
-              <span className="text-blue-400">Projects</span>
+            
+            <motion.div variants={fadeUp} custom={1} className="text-gradient pb-2">
+              Frontend Engineer
             </motion.div>
-
-            {/* LINE 3 */}
-            <motion.div
-              variants={fadeUp}
-              custom={2}
-            >
-              that Deliver Results
+            
+            <motion.div variants={fadeUp} custom={2} className="text-white mt-1 leading-tight">
+              <span className="opacity-80 mr-2">&</span>
+              <span className="text-gradient">Full Stack</span>
+              <br className="hidden md:block" /> Developer.
             </motion.div>
           </motion.h1>
 
-          {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="text-gray-400 text-lg mt-8 max-w-lg"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+            className="text-gray-400 text-lg md:text-xl mt-8 max-w-xl leading-relaxed font-light"
           >
-            Hi, I’m Shreyanshu — a developer driven by a passion for building
-            impactful and seamless digital experiences.
+            I engineer high-performance web applications with a focus on polished UI, resilient architecture, and measurable impact.
           </motion.p>
 
-          {/* CTA */}
-          <div className="mt-14">
-            <SeeMyWorkButton />
-          </div>
+          {/* CTA Buttons */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="mt-10 flex flex-wrap gap-4 items-center"
+          >
+            <a
+              href="#projects"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors duration-200"
+            >
+              View Projects
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full glass text-white font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200"
+            >
+              Contact Me
+            </a>
+          </motion.div>
         </div>
 
-        {/* RIGHT (keep empty / visual later) */}
+        {/* RIGHT VISUAL ELEMENT */}
+        <div className="hidden lg:flex justify-center -mt-6 relative">
+           <CodeCard />
+        </div>
       </div>
     </section>
   );
 }
 
-/* CTA BUTTON — INLINE (Kartikey-style) */
-function SeeMyWorkButton() {
+function CodeCard() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
-    <motion.a
-      href="#projects"
-      initial="rest"
-      whileHover="hover"
-      animate="rest"
-      className="
-        group
-        relative
-        inline-flex
-        items-center
-        gap-6
-        px-10
-        py-4
-        rounded-2xl
-        bg-[#1c1f2a]
-        text-white
-        font-medium
-        tracking-wide
-        overflow-hidden
-      "
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="relative w-full max-w-[380px] rotate-3 hover:rotate-0 transition-transform duration-500 rounded-3xl overflow-hidden"
     >
-      {/* Hover overlay */}
-      <motion.span
-        variants={{
-          rest: { opacity: 0 },
-          hover: { opacity: 1 },
-        }}
-        transition={{ duration: 0.3 }}
-        className="absolute inset-0 bg-white/5"
-      />
-
-      {/* Text */}
-      <span className="relative z-10 uppercase text-sm">
-        See my work
-      </span>
-
-      {/* Arrow circle */}
-      <motion.span
-        variants={{
-          rest: { x: 0 },
-          hover: { x: 6 },
-        }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        className="
-          relative z-10
-          flex items-center justify-center
-          w-10 h-10
-          rounded-full
-          bg-[#e6f0ff]
-        "
+      {/* Container for Edge Glow */}
+      <div 
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        className="rounded-3xl p-[1px] overflow-hidden group cursor-default"
       >
-        <motion.img
-          src="/images/arrow-down.svg"
-          alt="arrow"
-          variants={{
-            rest: { y: 0 },
-            hover: { y: 4 },
+        {/* Dynamic Glowing Border Behind Inner Card */}
+        <motion.div
+          className="absolute -inset-px z-0 pointer-events-none transition-opacity duration-300"
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          style={{
+            background: `radial-gradient(250px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,1), transparent 100%)`
           }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          className="w-4 h-4"
         />
-      </motion.span>
-    </motion.a>
+
+        {/* Inner Liquid Glass Card - Highly opaque dark base to block center bleed */}
+        <div className="relative z-10 rounded-[23px] bg-[#0c0c0e]/95 backdrop-blur-3xl flex flex-col p-8 overflow-hidden shadow-2xl">
+          {/* Subtle reflection overlay for liquid feel */}
+          <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
+
+          {/* Inner Content */}
+          <div className="w-full flex justify-between items-center mb-6 relative z-10">
+            <div className="flex gap-2">
+              <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-400/80"></div>
+              <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
+            </div>
+            <div className="text-xs text-gray-500 font-mono">portfolio.jsx</div>
+          </div>
+          
+          <div className="space-y-4 font-mono text-sm relative z-10">
+            <div className="text-gray-400">
+              import <span className="text-white">
+                <Typewriter words={["Experience", "Innovation", "Scalability", "Design"]} delay={100} />
+              </span> from <span className="text-green-300">"./impact"</span>;
+            </div>
+            <div className="text-gray-400">
+              import <span className="text-white">
+                <Typewriter words={["Code", "Logic", "State", "Velocity"]} delay={120} pause={2500} />
+              </span> from <span className="text-green-300">"./aesthetics"</span>;
+            </div>
+            <br/>
+            <div className="text-gray-400">// Building the future,</div>
+            <div className="text-gray-400">// one line of code at a time</div>
+            <br/>
+            <div className="text-gray-400">const <span className="text-white">Developer</span> = <span className="text-gray-400">() =&gt;</span> {'{'}</div>
+            <div className="pl-4 text-gray-300">return <span className="text-red-300">&lt;Masterpiece /&gt;</span>;</div>
+            <div className="text-purple-400">{'}'}</div>
+          </div>
+          
+          {/* Subtle Ambient Glow inside card */}
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/5 blur-[50px] rounded-full point-events-none mix-blend-screen" />
+        </div>
+      </div>
+    </motion.div>
   );
 }

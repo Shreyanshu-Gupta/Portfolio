@@ -1,28 +1,33 @@
 import Navbar from "./components/Navbar";
 import LandingHero from "./components/LandingHero";
-import About from "./components/About";
-import Skills from "./components/Skills";
+import Achievements from "./components/Achievements";
 import Projects from "./components/Projects";
-import Contact from "./components/Contact";
 import Experience from "./components/Experience";
 import Education from "./components/Education";
-import Achievements from "./components/Achievements";
+import Skills from "./components/Skills";
+import About from "./components/About";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   return (
-    <>
+    <div className="bg-[#09090b] min-h-screen font-sans text-gray-200">
       <Navbar />
       <LandingHero />
-      <About />
-      <Skills />
+      <Achievements />
+      <Projects />
       <Experience />
       <Education />
-      <Projects />
-      <Achievements />
+      <Skills />
+      <About />
       <Contact />
       <Footer />
-    </>
+    </div>
   );
 }
 

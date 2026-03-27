@@ -1,18 +1,29 @@
 export const projects = [
   {
-    title: "Portfolio Website",
-    description:
-      "A personal portfolio built with React, Vite, and Tailwind CSS.",
-    tech: ["React", "Tailwind", "Vite"],
-    live: "#",
-    github: "#",
+    title: "Netflix Clone",
+    description: "A fully responsive streaming platform clone featuring user authentication, seamless API integration with TMDB for real-time movie data, and dynamic trailer playback.",
+    impact: "Built a highly performant and visually identical frontend experience simulating a production-level video-on-demand platform.",
+    tech: ["React", "Firebase", "Redux", "TMDB API", "CSS/Tailwind"],
+    live: "https://netflix-clone-gamma-eight-71.vercel.app/",
+    github: "https://github.com/Shreyanshu-Gupta/netflix-clone.git",
+    image: "/images/netflix-preview.jpg", // Add your image in the public/images/ folder
   },
   {
-    title: "Todo App",
-    description:
-      "A simple todo app with state management and clean UI.",
-    tech: ["React", "JavaScript"],
+    title: "AyurNutri",
+    description: "AI-powered diet and nutrition system. Drastically improved patient onboarding by automating diet plan generation and monitoring.",
+    impact: "Reduced diet planning downtime from 45 min to < 30 sec.",
+    tech: ["React", "Redux", "WebSocket", "Node.js", "AI Integration"],
     live: "#",
     github: "#",
+    image: "/images/ayurnutri-preview.jpg", // Add your image in the public/images/ folder
   },
+  {
+    title: "Lane Violation System",
+    description: "Automated traffic law enforcement system utilizing computer vision for dynamic lane violation tracking and automated ticketing.",
+    impact: "Achieved 87%+ detection accuracy across lighting conditions.",
+    tech: ["Python", "OpenCV", "Machine Learning", "Automated Email Systems"],
+    live: "#",
+    github: "#",
+    image: "/images/lane-preview.jpg", // Add your image in the public/images/ folder
+  }
 ];

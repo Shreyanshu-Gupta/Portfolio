@@ -1,21 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
-  { label: "About", id: "about" },
-  { label: "Skills", id: "skills" },
-  { label: "Experience", id: "experience" },
   { label: "Projects", id: "projects" },
+  { label: "Experience", id: "experience" },
+  { label: "Skills", id: "skills" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  useEffect(() => {
+    const handleScrollEvent = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScrollEvent);
+    return () => window.removeEventListener("scroll", handleScrollEvent);
+  }, []);
 
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (!section) return;
 
-    const yOffset = -96; // navbar height
+    const yOffset = -100; // floating navbar height offset
     const y =
       section.getBoundingClientRect().top +
       window.pageYOffset +
@@ -30,132 +39,143 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/70 backdrop-blur">
-      <div className="max-w-7xl mx-auto px-6 h-20 grid grid-cols-3 items-center text-white">
-
-        {/* LEFT – LOGO */}
-        <div className="font-bold text-lg">
-          Shreyanshu<span className="text-blue-400">.</span>
-        </div>
-
-        {/* CENTER – LINKS */}
-        <div className="hidden md:flex justify-center gap-10">
-          {links.map((link) => (
-            <NavLink
+    <>
+      {/* DESKTOP NAVBAR - CENTER PILL */}
+      <motion.nav 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center py-2 px-3 rounded-full glass border border-white/10 text-sm font-medium transition-colors duration-300"
+        style={{
+          backgroundColor: scrolled ? "rgba(9, 9, 11, 0.8)" : "rgba(25, 25, 25, 0.3)",
+          boxShadow: scrolled ? "0 10px 30px -10px rgba(0,0,0,0.5)" : "none"
+        }}
+      >
+        <div className="flex items-center gap-1">
+          {links.map((link, idx) => (
+            <button
               key={link.id}
-              text={link.label}
               onClick={() => handleScroll(link.id)}
-            />
-          ))}
-        </div>
-
-        {/* RIGHT – CONTACT BUTTON */}
-        <div className="hidden md:flex justify-end">
-          <ContactButton onClick={() => handleScroll("contact")} />
-        </div>
-
-        {/* MOBILE TOGGLE */}
-        <div className="md:hidden flex justify-end">
-          <button onClick={() => setOpen(!open)}>
-            <motion.div
-              animate={{ rotate: open ? 90 : 0 }}
-              transition={{ duration: 0.3 }}
-              className="text-2xl"
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="relative px-5 py-2.5 text-gray-300 hover:text-white transition-colors rounded-full"
             >
-              {open ? "✕" : "☰"}
-            </motion.div>
+              {hoveredIndex === idx && (
+                <motion.div
+                  layoutId="nav-pill"
+                  className="absolute inset-0 bg-white/10 rounded-full"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+              <span className="relative z-10">{link.label}</span>
+            </button>
+          ))}
+          
+          {/* Resume link added at the end */}
+          <a
+            href="/SHREYANSHU.pdf"
+            target="_blank"
+            rel="noreferrer"
+            onMouseEnter={() => setHoveredIndex(links.length)}
+            onMouseLeave={() => setHoveredIndex(null)}
+            className="relative px-5 py-2.5 text-gray-300 hover:text-white transition-colors rounded-full"
+          >
+             {hoveredIndex === links.length && (
+                <motion.div
+                  layoutId="nav-pill"
+                  className="absolute inset-0 bg-white/10 rounded-full"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+            <span className="relative z-10">Resume</span>
+          </a>
+        </div>
+      </motion.nav>
+
+      {/* DESKTOP NAVBAR - RIGHT CORNER CONTACT */}
+      <motion.div 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        className="fixed top-6 right-6 z-50 hidden md:block"
+      >
+        <button
+          onClick={() => handleScroll("contact")}
+          className="relative group px-6 py-2.5 rounded-full bg-white text-black text-sm font-semibold overflow-hidden transition-transform hover:scale-105 shadow-xl"
+        >
+          <span className="absolute inset-0 bg-gray-200 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+          <span className="relative z-10">Contact</span>
+        </button>
+      </motion.div>
+
+      {/* MOBILE NAVBAR TOP BAR */}
+      <nav className="fixed top-0 w-full z-50 md:hidden bg-[#09090b]/80 backdrop-blur-md border-b border-white/10 transition-colors duration-300">
+        <div className="px-6 h-16 flex items-center justify-end text-white">
+          <button onClick={() => setOpen(!open)} className="p-2 -mr-2 text-gray-300 hover:text-white transition-transform active:scale-95">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              {open ? (
+                <>
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </>
+              ) : (
+                <>
+                  <line x1="3" y1="12" x2="21" y2="12"></line>
+                  <line x1="3" y1="6" x2="21" y2="6"></line>
+                  <line x1="3" y1="18" x2="21" y2="18"></line>
+                </>
+              )}
+            </svg>
           </button>
         </div>
-      </div>
+      </nav>
 
       {/* MOBILE MENU */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-black border-t border-white/10"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="fixed top-16 left-0 w-full z-40 md:hidden bg-[#09090b] border-b border-white/10 overflow-hidden"
           >
-            <div className="px-6 py-6 flex flex-col gap-5">
+            <div className="px-6 py-8 flex flex-col gap-6 items-center">
               {links.map((link, i) => (
                 <motion.button
                   key={link.id}
                   onClick={() => handleScroll(link.id)}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08 }}
-                  className="text-left text-gray-300"
+                  transition={{ delay: i * 0.1 }}
+                  className="text-2xl font-medium text-gray-400 hover:text-white transition-colors"
                 >
                   {link.label}
                 </motion.button>
               ))}
-              <button
-                onClick={() => handleScroll("contact")}
-                className="mt-4 text-blue-400 text-left"
+              <motion.a
+                href="/SHREYANSHU.pdf"
+                target="_blank"
+                rel="noreferrer"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: links.length * 0.1 }}
+                className="text-2xl font-medium text-gray-400 hover:text-white transition-colors"
               >
-                Contact me →
-              </button>
+                Resume
+              </motion.a>
+              <motion.button
+                onClick={() => handleScroll("contact")}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: (links.length + 1) * 0.1 }}
+                className="mt-6 px-10 py-4 rounded-full bg-white text-black font-semibold text-lg hover:scale-105 transition-transform w-[250px]"
+              >
+                Contact
+              </motion.button>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
-  );
-}
-
-/* CENTER LINKS */
-function NavLink({ text, onClick }) {
-  return (
-    <motion.button
-      onClick={onClick}
-      className="relative text-gray-300 hover:text-white"
-      initial="rest"
-      whileHover="hover"
-      animate="rest"
-    >
-      {text}
-      <motion.span
-        variants={{
-          rest: { scaleX: 0 },
-          hover: { scaleX: 1 },
-        }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
-        className="absolute left-1/2 -bottom-2 h-[2px] w-full bg-white origin-center -translate-x-1/2"
-      />
-    </motion.button>
-  );
-}
-
-/* CONTACT BUTTON */
-function ContactButton({ onClick }) {
-  return (
-    <motion.button
-      onClick={onClick}
-      initial="rest"
-      whileHover="hover"
-      animate="rest"
-      className="relative overflow-hidden rounded-full border border-white/20 px-6 py-2 font-medium"
-    >
-      <motion.span
-        variants={{
-          rest: { x: "-100%" },
-          hover: { x: "0%" },
-        }}
-        transition={{ duration: 0.35, ease: "easeOut" }}
-        className="absolute inset-0 bg-white/20"
-      />
-      <motion.span
-        variants={{
-          rest: { color: "#ffffff" },
-          hover: { color: "#000000" },
-        }}
-        transition={{ duration: 0.35 }}
-        className="relative z-10"
-      >
-        Contact me
-      </motion.span>
-    </motion.button>
+    </>
   );
 }
