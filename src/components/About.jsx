@@ -16,7 +16,7 @@ export default function About() {
             </svg>
           </div>
           
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 tracking-tight leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-8 tracking-tight leading-tight">
             Builder mindset. <br className="hidden md:block"/>
             <span className="text-gray-500 font-normal">Problem-solving focus.</span>
           </h2>

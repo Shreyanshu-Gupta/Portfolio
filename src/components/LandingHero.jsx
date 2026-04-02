@@ -80,7 +80,7 @@ export default function LandingHero() {
           <motion.h1
             initial="hidden"
             animate="visible"
-            className="text-5xl md:text-[4rem] lg:text-[4.5rem] font-extrabold tracking-tight leading-[1.1]"
+            className="text-4xl sm:text-5xl md:text-[4rem] lg:text-[4.5rem] font-extrabold tracking-tight leading-[1.1]"
           >
             <motion.div variants={fadeUp} custom={0} className="text-gray-400 font-medium text-xl md:text-2xl mb-4 tracking-normal">
               Hi, I'm Shreyanshu Kumar
@@ -115,14 +115,14 @@ export default function LandingHero() {
           >
             <a
               href="#projects"
-              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:-translate-y-1 transition-all duration-300"
+              className="group inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:-translate-y-1 transition-all duration-300"
             >
               View Projects
               <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full glass text-white font-medium hover:bg-orange-500/10 hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-300"
+              className="inline-flex items-center justify-center px-6 sm:px-8 py-3.5 sm:py-4 rounded-full glass text-white font-medium hover:bg-orange-500/10 hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-300"
             >
               Contact Me
             </a>

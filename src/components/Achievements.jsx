@@ -44,7 +44,7 @@ export default function Achievements() {
   };
 
   return (
-    <section id="achievements" className="py-24 relative bg-[#050505] z-10" ref={container}>
+    <section id="achievements" className="py-24 relative bg-[#050505] overflow-hidden z-10" ref={container}>
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="mb-16 md:flex justify-between items-end">
@@ -61,7 +61,7 @@ export default function Achievements() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
             >
               Hackathon <span className="text-gray-500 font-light">Victories.</span>
             </motion.h3>

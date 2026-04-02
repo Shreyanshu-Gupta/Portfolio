@@ -52,7 +52,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
           >
             Professional <span className="text-gray-500 font-light">Experience.</span>
           </motion.h3>

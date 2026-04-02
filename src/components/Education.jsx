@@ -9,13 +9,13 @@ export default function Education() {
       year: "2023 – 2027"
     },
     {
-      school: "UMS Durgasthan",
+      school: "Darshan Shah College, Katihar",
       degree: "Senior Secondary Education",
       score: "64.4%",
       year: "2022"
     },
     {
-      school: "UMS Durgasthan",
+      school: "UMS",
       degree: "Secondary Education",
       score: "84.4%",
       year: "2020"
@@ -38,7 +38,7 @@ export default function Education() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
           >
             Education <span className="text-gray-500 font-light">Journey.</span>
           </motion.h3>

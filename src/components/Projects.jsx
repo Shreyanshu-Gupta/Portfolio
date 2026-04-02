@@ -23,7 +23,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, delay: 0.1 }}
-              className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight"
             >
               Projects that drive <span className="text-gray-500 font-light">impact.</span>
             </motion.h3>
@@ -89,7 +89,7 @@ export default function Projects() {
                   <div className="text-sm text-white font-medium">{project.impact}</div>
                 </div>
 
-                <div className="flex items-center gap-6">
+                <div className="flex flex-wrap items-center gap-4 sm:gap-6">
                   <a href={project.live} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-white font-medium group/link border-b border-orange-500/30 pb-0.5 hover:border-orange-500 hover:text-orange-400 transition-colors">
                     <span className="text-sm">Live Preview</span>
                     <svg className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
