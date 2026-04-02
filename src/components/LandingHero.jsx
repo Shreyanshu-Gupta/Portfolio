@@ -87,13 +87,13 @@ export default function LandingHero() {
             </motion.div>
             
             <motion.div variants={fadeUp} custom={1} className="text-gradient-orange pb-2 drop-shadow-[0_0_15px_rgba(249,115,22,0.3)]">
-              Frontend Engineer
+              Frontend <span className="whitespace-nowrap"><Typewriter words={["Engineer", "Architect", "Designer"]} delay={100} pause={2000} /></span>
             </motion.div>
             
             <motion.div variants={fadeUp} custom={2} className="text-white mt-1 leading-tight">
               <span className="opacity-80 mr-2">&</span>
-              <span className="text-gradient">Full Stack</span>
-              <br className="hidden md:block" /> Developer.
+              <span className="text-gradient mr-2 lg:mr-3">Full Stack</span>
+              <span className="whitespace-nowrap"><Typewriter words={["Developer."]} delay={120} pause={2500} /></span>
             </motion.div>
           </motion.h1>
 
