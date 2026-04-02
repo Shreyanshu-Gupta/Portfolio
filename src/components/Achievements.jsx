@@ -12,23 +12,23 @@ export default function Achievements() {
     {
       title: "SIH 2025",
       subtitle: "Hackathon Champion",
-      image: "/images/sih2025.jpg", 
+      image: "/images/sih2025.jpeg", 
       certificate: "View Certificate",
-      link: "#"
+      link: "/images/certificates/SIH2025-Certificate.jpeg"
     },
     {
       title: "Hackstreet 2024",
       subtitle: "Winner",
-      image: "/images/hackstreet2024.jpg",
+      image: "/images/HackStreet2024.jpeg",
       certificate: "View Certificate",
-      link: "#"
+      link: "public/images/certificates/HackStreet-Certificate.jpeg"
     },
     {
       title: "HackArCode 2024",
       subtitle: "Winner",
-      image: "/images/hackarcode2024.jpg",
+      image: "/images/HackArCode2024.jpeg",
       certificate: "View Certificate",
-      link: "#"
+      link: "/images/certificates/HackArCode-Certificate.jpeg"
     }
   ];
 
@@ -70,6 +70,8 @@ export default function Achievements() {
             <a 
               key={i} 
               href={item.link}
+              target="_blank"
+              rel="noreferrer"
               className="hackathon-card group relative h-[400px] rounded-[2rem] bg-[#111113] border border-white/5 overflow-hidden transition-all duration-500 hover:border-white/20 block"
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:24px_24px]" />
