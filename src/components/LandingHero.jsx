@@ -3,13 +3,13 @@ import { motion } from "framer-motion";
 import FlipInline from "./FlipInline";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 30 },
   visible: (i) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.1,
-      duration: 0.6,
+      delay: i * 0.15,
+      duration: 0.8,
       ease: [0.21, 0.47, 0.32, 0.98],
     },
   }),
@@ -50,7 +50,7 @@ const Typewriter = ({ words, delay = 150, pause = 2000 }) => {
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ repeat: Infinity, duration: 0.8 }}
-        className="inline-block w-[8px] h-[1em] bg-white align-middle ml-[1px]"
+        className="inline-block w-[8px] h-[1em] bg-orange-500 align-middle ml-[1px]"
       />
     </>
   );
@@ -58,9 +58,9 @@ const Typewriter = ({ words, delay = 150, pause = 2000 }) => {
 
 export default function LandingHero() {
   return (
-    <section className="relative min-h-screen flex flex-col justify-center pt-12 pb-12 overflow-hidden bg-[#09090b]">
-      {/* Subtle glowing radial background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-white/[0.03] blur-[120px] rounded-full pointer-events-none" />
+    <section className="relative min-h-screen flex flex-col justify-center pt-12 pb-12 overflow-hidden bg-[#050505]">
+      {/* Subtle glowing radial background - Orange */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-orange-600/[0.08] blur-[150px] rounded-full pointer-events-none" />
       
       <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10 w-full">
         {/* LEFT COMPONENT */}
@@ -69,10 +69,10 @@ export default function LandingHero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass mb-8"
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full glass border border-orange-500/20 mb-8"
           >
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            <span className="text-xs font-medium text-gray-300 uppercase tracking-wider">
+            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
+            <span className="text-xs font-medium text-orange-200 uppercase tracking-wider">
               Available for work
             </span>
           </motion.div>
@@ -86,7 +86,7 @@ export default function LandingHero() {
               Hi, I'm Shreyanshu Kumar
             </motion.div>
             
-            <motion.div variants={fadeUp} custom={1} className="text-gradient pb-2">
+            <motion.div variants={fadeUp} custom={1} className="text-gradient-orange pb-2 drop-shadow-[0_0_15px_rgba(249,115,22,0.3)]">
               Frontend Engineer
             </motion.div>
             
@@ -115,14 +115,14 @@ export default function LandingHero() {
           >
             <a
               href="#projects"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-white text-black font-semibold hover:bg-gray-200 transition-colors duration-200"
+              className="group inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-orange-500 text-white font-semibold hover:bg-orange-400 hover:shadow-[0_0_20px_rgba(249,115,22,0.4)] hover:-translate-y-1 transition-all duration-300"
             >
               View Projects
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              <svg className="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-8 py-4 rounded-full glass text-white font-medium hover:bg-white/10 hover:border-white/20 transition-all duration-200"
+              className="inline-flex items-center justify-center px-8 py-4 rounded-full glass text-white font-medium hover:bg-orange-500/10 hover:border-orange-500/40 hover:-translate-y-1 transition-all duration-300"
             >
               Contact Me
             </a>
@@ -131,7 +131,13 @@ export default function LandingHero() {
 
         {/* RIGHT VISUAL ELEMENT */}
         <div className="hidden lg:flex justify-center -mt-6 relative">
-           <CodeCard />
+          <motion.div
+            initial={{ y: 0 }}
+            animate={{ y: [-10, 10, -10] }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <CodeCard />
+          </motion.div>
         </div>
       </div>
     </section>
@@ -155,7 +161,7 @@ function CodeCard() {
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, delay: 0.3 }}
-      className="relative w-full max-w-[380px] rotate-3 hover:rotate-0 transition-transform duration-500 rounded-3xl overflow-hidden"
+      className="relative w-full max-w-[380px] rotate-[2deg] hover:rotate-0 transition-transform duration-500 rounded-3xl overflow-hidden"
     >
       {/* Container for Edge Glow */}
       <div 
@@ -169,21 +175,21 @@ function CodeCard() {
           className="absolute -inset-px z-0 pointer-events-none transition-opacity duration-300"
           animate={{ opacity: isHovered ? 1 : 0 }}
           style={{
-            background: `radial-gradient(250px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(255,255,255,1), transparent 100%)`
+            background: `radial-gradient(250px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(249,115,22,0.8), transparent 100%)`
           }}
         />
 
         {/* Inner Liquid Glass Card - Highly opaque dark base to block center bleed */}
-        <div className="relative z-10 rounded-[23px] bg-[#0c0c0e]/95 backdrop-blur-3xl flex flex-col p-8 overflow-hidden shadow-2xl">
+        <div className="relative z-10 rounded-[23px] bg-[#0c0c0e]/95 backdrop-blur-3xl flex flex-col p-8 overflow-hidden shadow-2xl border border-white/5 group-hover:border-transparent transition-colors">
           {/* Subtle reflection overlay for liquid feel */}
-          <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/5 to-transparent pointer-events-none" />
 
           {/* Inner Content */}
           <div className="w-full flex justify-between items-center mb-6 relative z-10">
             <div className="flex gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-400/80"></div>
-              <div className="w-3 h-3 rounded-full bg-yellow-400/80"></div>
-              <div className="w-3 h-3 rounded-full bg-green-400/80"></div>
+              <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+              <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+              <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
             </div>
             <div className="text-xs text-gray-500 font-mono">portfolio.jsx</div>
           </div>
@@ -192,24 +198,24 @@ function CodeCard() {
             <div className="text-gray-400">
               import <span className="text-white">
                 <Typewriter words={["Experience", "Innovation", "Scalability", "Design"]} delay={100} />
-              </span> from <span className="text-green-300">"./impact"</span>;
+              </span> from <span className="text-orange-400">"./impact"</span>;
             </div>
             <div className="text-gray-400">
               import <span className="text-white">
                 <Typewriter words={["Code", "Logic", "State", "Velocity"]} delay={120} pause={2500} />
-              </span> from <span className="text-green-300">"./aesthetics"</span>;
+              </span> from <span className="text-orange-400">"./aesthetics"</span>;
             </div>
             <br/>
             <div className="text-gray-400">// Building the future,</div>
             <div className="text-gray-400">// one line of code at a time</div>
             <br/>
-            <div className="text-gray-400">const <span className="text-white">Developer</span> = <span className="text-gray-400">() =&gt;</span> {'{'}</div>
-            <div className="pl-4 text-gray-300">return <span className="text-red-300">&lt;Masterpiece /&gt;</span>;</div>
-            <div className="text-purple-400">{'}'}</div>
+            <div className="text-orange-300">const <span className="text-white">Developer</span> = <span className="text-orange-300">() =&gt;</span> {'{'}</div>
+            <div className="pl-4 text-gray-300">return <span className="text-white">&lt;Masterpiece /&gt;</span>;</div>
+            <div className="text-orange-300">{'}'}</div>
           </div>
           
           {/* Subtle Ambient Glow inside card */}
-          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-white/5 blur-[50px] rounded-full point-events-none mix-blend-screen" />
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-orange-500/10 blur-[50px] rounded-full pointer-events-none mix-blend-screen" />
         </div>
       </div>
     </motion.div>

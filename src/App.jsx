@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   return (
-    <div className="bg-[#09090b] min-h-screen font-sans text-gray-200">
+    <div className="bg-[#050505] min-h-screen font-sans text-gray-200">
       <Navbar />
       <LandingHero />
       <Achievements />

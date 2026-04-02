@@ -36,17 +36,29 @@ export default function Experience() {
   ];
 
   return (
-    <section id="experience" className="py-16 md:py-24 bg-[#09090b] relative">
+    <section id="experience" className="py-16 md:py-24 bg-[#050505] relative">
       <div className="max-w-4xl mx-auto px-6">
         
         <div className="mb-16">
-          <h2 className="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-3">Career</h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-sm font-semibold text-orange-500 tracking-wider uppercase mb-3"
+          >
+            Career
+          </motion.h2>
+          <motion.h3 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+          >
             Professional <span className="text-gray-500 font-light">Experience.</span>
-          </h3>
+          </motion.h3>
         </div>
 
-        <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-white/10 before:to-transparent z-10">
+        <div className="space-y-12 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-orange-500/20 before:to-transparent z-10">
           {experiences.map((exp, i) => (
             <motion.div
               key={i}
@@ -56,22 +68,22 @@ export default function Experience() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active"
             >
-              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-[#09090b] text-gray-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:border-white group-hover:bg-white/10">
-                <div className="w-2 h-2 bg-white rounded-full group-hover:scale-150 transition-transform duration-300" />
+              <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#050505] text-gray-400 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 transition-colors duration-300 group-hover:border-orange-500 group-hover:bg-orange-500/10 block">
+                <div className="w-2 h-2 bg-orange-500 rounded-full group-hover:scale-[1.8] group-hover:bg-orange-400 group-hover:shadow-[0_0_10px_rgba(249,115,22,0.8)] transition-all duration-300" />
               </div>
               
               <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] glass-card rounded-2xl p-6">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2">
-                  <h4 className="text-xl font-bold text-white">{exp.role}</h4>
+                  <h4 className="text-xl font-bold text-white group-hover:text-orange-400 transition-colors">{exp.role}</h4>
                   <span className="text-sm font-medium text-gray-400 mt-1 sm:mt-0">{exp.period}</span>
                 </div>
-                <div className="text-gray-400 font-medium mb-4">{exp.company}</div>
+                <div className="text-orange-500/80 font-medium mb-4 group-hover:text-orange-500 transition-colors">{exp.company}</div>
                 <p className="text-gray-300 text-sm mb-4">{exp.description}</p>
                 <ul className="space-y-2">
                   {exp.achievements.map((achieve, j) => (
                     <li key={j} className="text-sm text-gray-500 flex items-start gap-2">
-                      <span className="text-gray-500 mt-0.5 opacity-70">▹</span>
-                      <span>{achieve}</span>
+                      <span className="text-orange-500/70 mt-0.5 opacity-70">▹</span>
+                      <span className="group-hover:text-gray-400 transition-colors">{achieve}</span>
                     </li>
                   ))}
                 </ul>

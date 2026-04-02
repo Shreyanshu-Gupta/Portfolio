@@ -21,13 +21,25 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-16 md:py-24 bg-[#09090b] relative">
+    <section id="skills" className="py-16 md:py-24 bg-[#050505] relative">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center max-w-2xl mx-auto">
-          <h2 className="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-3">Capabilities</h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-sm font-semibold text-orange-500 tracking-wider uppercase mb-3"
+          >
+            Capabilities
+          </motion.h2>
+          <motion.h3 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+          >
             Technical <span className="text-gray-500 font-light">Arsenal.</span>
-          </h3>
+          </motion.h3>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -38,17 +50,17 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass-card rounded-3xl p-8 flex flex-col h-full"
+              className="glass-card flex flex-col h-full rounded-3xl p-8"
             >
               <h4 className="text-xl font-bold text-white mb-6 flex items-center gap-3">
-                <span className="w-8 h-px bg-white/50 block"></span>
+                <span className="w-8 h-px bg-orange-500/50 block"></span>
                 {category.title}
               </h4>
               <div className="flex flex-wrap gap-2 mt-auto">
                 {category.skills.map((skill, j) => (
                   <span
                     key={j}
-                    className="px-3 py-1.5 bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg hover:bg-white/10 hover:border-white/20 transition-colors cursor-default"
+                    className="px-3 py-1.5 bg-white/5 border border-white/10 text-gray-300 text-sm rounded-lg hover:bg-orange-500/10 hover:border-orange-500/40 hover:text-orange-300 transition-colors cursor-default"
                   >
                     {skill}
                   </span>

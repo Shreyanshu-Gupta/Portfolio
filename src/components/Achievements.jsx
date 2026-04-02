@@ -1,9 +1,5 @@
 import { useRef } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { motion } from "framer-motion";
 
 export default function Achievements() {
   const container = useRef(null);
@@ -32,49 +28,63 @@ export default function Achievements() {
     }
   ];
 
-  useGSAP(() => {
-    const cards = gsap.utils.toArray('.hackathon-card');
-    
-    gsap.fromTo(cards, 
-      { opacity: 0, y: 50 }, 
-      {
-        opacity: 1, 
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        stagger: 0.15,
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15
       }
-    );
-  }, { scope: container });
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
+  };
 
   return (
-    <section id="achievements" className="py-24 relative bg-[#09090b] z-10" ref={container}>
+    <section id="achievements" className="py-24 relative bg-[#050505] z-10" ref={container}>
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="mb-16 md:flex justify-between items-end">
           <div className="max-w-xl">
-            <h2 className="text-sm font-semibold text-gray-400 tracking-wider uppercase mb-3">Accolades</h2>
-            <h3 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+            <motion.h2 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-sm font-semibold text-orange-500 tracking-wider uppercase mb-3"
+            >
+              Accolades
+            </motion.h2>
+            <motion.h3 
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, delay: 0.1 }}
+              className="text-4xl md:text-5xl font-bold text-white tracking-tight"
+            >
               Hackathon <span className="text-gray-500 font-light">Victories.</span>
-            </h3>
+            </motion.h3>
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid md:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
           {hackathons.map((item, i) => (
-            <a 
+            <motion.a 
               key={i} 
               href={item.link}
               target="_blank"
               rel="noreferrer"
-              className="hackathon-card group relative h-[400px] rounded-[2rem] bg-[#111113] border border-white/5 overflow-hidden transition-all duration-500 hover:border-white/20 block"
+              variants={itemVariants}
+              className="hackathon-card group relative h-[400px] rounded-[2rem] bg-[#111113] border border-white/5 overflow-hidden transition-all duration-500 hover:border-orange-500/30 hover:shadow-[0_0_30px_rgba(249,115,22,0.15)] block"
             >
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:24px_24px]" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.03)_1px,transparent_1px)] bg-[length:24px_24px]" />
               
               <img 
                 src={item.image} 
@@ -94,17 +104,21 @@ export default function Achievements() {
                 <span className="text-gray-600 text-xs mt-2 font-mono">public{item.image}</span>
               </div>
 
-              <div className="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/40 to-transparent" />
+              {/* Overlay Gradient on Hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:opacity-100 opacity-90 transition-opacity duration-500" />
+              
+              {/* Added subtle orange glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-orange-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                <h4 className="text-3xl font-bold text-white group-hover:translate-x-1 transition-transform duration-300">
+              <div className="absolute inset-0 p-8 flex flex-col justify-end z-10">
+                <h4 className="text-3xl font-bold text-white group-hover:text-orange-400 group-hover:translate-x-1 transition-all duration-300">
                   {item.title}
                 </h4>
                 <p className="text-gray-400 font-medium mt-1 mb-4">
                   {item.subtitle}
                 </p>
                 
-                <div className="inline-flex items-center gap-2 text-sm text-gray-300 font-medium border-t border-white/10 pt-4 mt-auto opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75">
+                <div className="inline-flex items-center gap-2 text-sm text-orange-200 font-medium border-t border-orange-500/20 pt-4 mt-auto opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-75">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 15l8.38-4.68a2 2 0 000-3.53l-8.38-4.68a2 2 0 00-1.76 0l-8.38 4.68a2 2 0 000 3.53L12 15z"/>
                     <path d="M14 17.5v2.81a2 2 0 01-1.11 1.79l-1.78.89a2 2 0 01-1.79 0l-1.78-.89A2 2 0 016.43 20.31V17.5"/>
@@ -112,9 +126,9 @@ export default function Achievements() {
                   {item.certificate}
                 </div>
               </div>
-            </a>
+            </motion.a>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
