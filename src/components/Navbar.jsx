@@ -142,16 +142,17 @@ export default function Navbar() {
           >
             <div className="px-6 py-8 flex flex-col gap-6 items-center">
               {links.map((link, i) => (
-                <motion.button
+                <motion.a
                   key={link.id}
-                  onClick={() => handleScroll(link.id)}
+                  href={`#${link.id}`}
+                  onClick={() => setOpen(false)}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                   className="text-2xl font-medium text-gray-400 hover:text-orange-400 transition-colors"
                 >
                   {link.label}
-                </motion.button>
+                </motion.a>
               ))}
               <motion.a
                 href="/SHREYANSHU.pdf"
@@ -164,15 +165,16 @@ export default function Navbar() {
               >
                 Resume
               </motion.a>
-              <motion.button
-                onClick={() => handleScroll("contact")}
+              <motion.a
+                href="#contact"
+                onClick={() => setOpen(false)}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: (links.length + 1) * 0.1 }}
-                className="mt-6 px-10 py-4 rounded-full bg-orange-500 text-white font-semibold text-lg hover:scale-105 transition-transform w-[250px]"
+                className="mt-6 px-10 py-4 flex items-center justify-center rounded-full bg-orange-500 text-white font-semibold text-lg hover:scale-105 transition-transform w-[250px]"
               >
                 Contact
-              </motion.button>
+              </motion.a>
             </div>
           </motion.div>
         )}
