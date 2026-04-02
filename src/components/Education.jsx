@@ -17,7 +17,7 @@ export default function Education() {
     {
       school: "UMS",
       degree: "Secondary Education",
-      score: "84.4%",
+      score: "85.4%",
       year: "2020"
     }
   ];
