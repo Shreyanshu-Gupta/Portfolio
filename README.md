@@ -1,6 +1,6 @@
 # Shreyanshu Kumar | Developer Portfolio
 
-![Portfolio Preview](./public/images/certificates/SIH2025-Certificate.jpeg) <!-- Replace with an actual hero screenshot of your portfolio -->
+<!-- ![Portfolio Preview](./public/images/certificates/SIH2025-Certificate.jpeg) Replace with an actual hero screenshot of your portfolio -->
 
 A highly responsive, premium personal portfolio showcasing my expertise as a Frontend & Full Stack Developer. Built from the ground up with **React (Vite)**, customized with a modern **Black, Orange, and White** dark theme, and intricately animated using **Framer Motion**.
 
