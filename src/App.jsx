@@ -3,7 +3,7 @@ import LandingHero from "./components/LandingHero";
 import Achievements from "./components/Achievements";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
-import Education from "./components/Education";
+
 import Skills from "./components/Skills";
 import About from "./components/About";
 import Contact from "./components/Contact";
@@ -22,7 +22,7 @@ function App() {
       <Achievements />
       <Projects />
       <Experience />
-      <Education />
+
       <Skills />
       <About />
       <Contact />
