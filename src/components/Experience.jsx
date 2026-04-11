@@ -5,20 +5,23 @@ export default function Experience() {
     {
       role: "Frontend Engineer Intern",
       company: "Campus Pull",
-      period: "Recent",
+      period: "Feb 2026 – Present",
       description: "Spearheaded frontend architecture, focusing on web performance and scalable component design.",
       achievements: [
+        "Developed and deployed the internship listing page and complete guest-facing UI, improving overall accessibility.",
+        "Implemented major UI enhancements, ensuring consistent design across multiple pages.",
         "Led performance optimization initiatives resulting in a 30% improvement in load times.",
         "Engineered a scalable UI component library, achieving a 40% reduction in code duplication.",
       ]
     },
     {
       role: "ML Trainee",
-      company: "NVIDIA (DGX-A100)",
-      period: "Previous",
+      company: "Global Infoventures (NVIDIA DGX-A100)",
+      period: "Sep 2025 – Present",
       description: "Worked on high-performance Machine Learning systems and deployment workflows.",
       achievements: [
-        "Utilized NVIDIA DGX-A100 hardware for enterprise ML workloads.",
+        "Worked with NVIDIA DGX-A100 systems for high-performance machine learning workloads and experimentation.",
+        "Performed data preprocessing, model training, and evaluation to improve model accuracy.",
         "Deployed containerized ML pipelines utilizing Docker and Kubeflow.",
         "Developed scalable multi-person face recognition systems."
       ]

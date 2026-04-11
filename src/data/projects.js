@@ -12,7 +12,7 @@ export const projects = [
     title: "AyurNutri",
     description: "AI-powered diet and nutrition system. Drastically improved patient onboarding by automating diet plan generation and monitoring.",
     impact: "Reduced diet planning downtime from 45 min to < 30 sec.",
-    tech: ["React", "Redux", "WebSocket", "Node.js", "AI Integration"],
+    tech: ["React", "Tailwind CSS", "Node.js", "Express.js", "MongoDB", "WebSocket", "Redux", "AI Integration"],
     live: "#",
     github: "#",
     image: "/images/ayurnutri-preview.jpg", // Add your image in the public/images/ folder
@@ -21,7 +21,7 @@ export const projects = [
     title: "Lane Violation System",
     description: "Automated traffic law enforcement system utilizing computer vision for dynamic lane violation tracking and automated ticketing.",
     impact: "Achieved 87%+ detection accuracy across lighting conditions.",
-    tech: ["Python", "OpenCV", "Machine Learning", "Automated Email Systems"],
+    tech: ["Python", "OpenCV", "Computer Vision", "Machine Learning", "SMTP"],
     live: "#",
     github: "#",
     image: "/images/lane-preview.jpg", // Add your image in the public/images/ folder

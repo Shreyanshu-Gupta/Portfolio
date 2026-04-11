@@ -3,20 +3,20 @@ import { motion } from "framer-motion";
 export default function Skills() {
   const customCategories = [
     {
-      title: "Frontend",
-      skills: ["React", "Next.js", "Redux", "Tailwind CSS", "Framer Motion", "HTML/CSS"],
+      title: "Languages & Frontend",
+      skills: ["JavaScript (ES6+)", "C/C++", "React.js", "Redux", "HTML5", "CSS3", "Tailwind CSS", "Next.js", "Framer Motion"],
     },
     {
-      title: "Backend",
-      skills: ["Node.js", "Express", "REST APIs", "WebSockets"],
-    },
-    {
-      title: "Tools & DB",
-      skills: ["MongoDB", "Git/GitHub", "Docker", "Vite", "Postman", "Linux"],
+      title: "Backend & DB",
+      skills: ["Node.js", "Express", "REST APIs", "WebSockets", "MongoDB", "SQL"],
     },
     {
       title: "Core Concepts",
-      skills: ["System Architecture", "Performance Optimization", "Responsive Design", "Machine Learning/AI Integration"],
+      skills: ["Data Structures & Algorithms", "System Design (Basics)", "OOP", "Performance Optimization", "Machine Learning"],
+    },
+    {
+      title: "Tools & Workflows",
+      skills: ["Git/GitHub", "Docker", "Vite", "Postman", "Linux", "Responsive Design"],
     }
   ];
 
