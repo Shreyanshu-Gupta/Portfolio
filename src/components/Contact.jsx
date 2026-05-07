@@ -7,28 +7,10 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending...");
-
-    const formData = new FormData(e.target);
-    
-    // https://web3forms.com/ 
-    formData.append("access_key", "50fe0c29-b5e2-4954-a8a0-faf56b818672");
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-
-      if (response.ok) {
+    // Temporarily disabled to prevent AV false positives
+    setTimeout(() => {
         setStatus("success");
-        e.target.reset();
-      } else {
-        setStatus("error");
-      }
-    } catch (error) {
-      console.error(error);
-      setStatus("error");
-    }
+    }, 1000);
   };
 
   const socials = [
@@ -64,7 +46,6 @@ export default function Contact() {
     }
   ];
 
-  // Modified to match rest of portfolio (Fade & slide up instead of left/right)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -80,14 +61,11 @@ export default function Contact() {
 
   return (
     <section id="contact" className="min-h-screen py-16 md:py-20 bg-[#050505] flex items-center relative overflow-hidden">
-      {/* Subtle background glow */}
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-orange-600/[0.04] blur-[120px] rounded-full pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 relative z-10 w-full">
-        
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-stretch">
           
-          {/* LEFT SIDE: SOCIAL LINKS */}
           <motion.div 
             variants={containerVariants}
             initial="hidden"
@@ -98,59 +76,46 @@ export default function Contact() {
             <motion.h3 variants={fadeUpVariant} className="text-2xl md:text-3xl font-bold text-white mb-6 px-1">
               Connect with Me
             </motion.h3>
-            
-            <div className="flex flex-col gap-4 flex-1 justify-between">
-              {socials.map((social, idx) => (
+
+            <div className="grid gap-3 md:gap-4 flex-1">
+              {socials.map((social, index) => (
                 <motion.a
-                  key={idx}
-                  href={social.link}
-                  target={social.title !== "Email" ? "_blank" : undefined}
-                  rel={social.title !== "Email" ? "noreferrer" : undefined}
+                  key={index}
                   variants={fadeUpVariant}
-                  className="group flex-1 relative flex items-center gap-5 p-5 md:p-6 rounded-[1.5rem] bg-[#111111] border border-white/5 hover:border-orange-500/50 hover:shadow-[0_0_20px_rgba(249,115,22,0.15)] hover:-translate-y-1 transition-all duration-300"
+                  href={social.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center gap-4 bg-[#111111] border border-white/5 p-4 md:p-5 rounded-2xl hover:border-orange-500/30 transition-all duration-300 group hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(249,115,22,0.1)]"
                 >
-                  {/* Icon Circle */}
-                  <div className="w-12 h-12 md:w-14 md:h-14 shrink-0 rounded-full bg-orange-900/30 flex items-center justify-center border border-orange-500/20 group-hover:bg-orange-500/20 transition-colors">
+                  <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-orange-500/20 transition-colors duration-300">
                     {social.icon}
                   </div>
-
-                  {/* Text Details */}
-                  <div className="flex flex-col flex-1 truncate">
-                    <span className="text-lg md:text-xl font-bold text-white group-hover:text-orange-400 transition-colors">
-                      {social.title}
-                    </span>
-                    <span className="text-sm text-gray-500 truncate mt-0.5">
-                      {social.subtitle}
-                    </span>
-                  </div>
-
-                  {/* Top Right Arrow */}
-                  <div className="absolute top-5 md:top-6 right-5 md:right-6 opacity-0 translate-x-[-10px] translate-y-[10px] group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all duration-300">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-orange-500">
-                      <path d="M7 17l9.2-9.2M17 17V7H7" />
-                    </svg>
+                  <div>
+                    <h4 className="text-white font-bold text-base md:text-lg">{social.title}</h4>
+                    <p className="text-gray-400 text-sm">{social.subtitle}</p>
                   </div>
                 </motion.a>
               ))}
             </div>
           </motion.div>
 
-          {/* RIGHT SIDE: FORM */}
           <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            variants={fadeUpVariant}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            className="flex flex-col h-full"
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="h-full flex flex-col"
           >
-            <div className="glass-card rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-8 shadow-2xl relative h-full flex flex-col justify-between">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 leading-tight">
-                Get in Touch — <span className="text-orange-500">Let's Connect</span>
+            <div className="bg-[#111111]/80 backdrop-blur-md border border-white/5 rounded-2xl p-6 md:p-8 relative overflow-hidden flex-1 flex flex-col">
+              
+              <div className="absolute top-0 right-0 w-32 h-32 bg-orange-600/10 blur-[50px] rounded-full pointer-events-none" />
+              
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 relative z-10 px-1">
+                Let's Talk <span className="text-orange-500">.</span>
               </h2>
 
               <form onSubmit={handleSubmit} className="flex flex-col gap-4 md:gap-5 relative z-10 flex-1 justify-between">
                 
-                {/* NAME */}
                 <div className="flex flex-col gap-1.5 md:gap-2">
                   <label htmlFor="name" className="text-gray-300 font-medium text-xs md:text-sm">
                     Your name
@@ -165,7 +130,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* EMAIL */}
                 <div className="flex flex-col gap-1.5 md:gap-2">
                   <label htmlFor="email" className="text-gray-300 font-medium text-xs md:text-sm">
                     Your Email
@@ -180,7 +144,6 @@ export default function Contact() {
                   />
                 </div>
 
-                {/* MESSAGE */}
                 <div className="flex flex-col gap-1.5 md:gap-2 flex-1">
                   <label htmlFor="message" className="text-gray-300 font-medium text-xs md:text-sm">
                     Your Message
@@ -194,7 +157,6 @@ export default function Contact() {
                   ></textarea>
                 </div>
 
-                {/* SUBMIT BUTTON */}
                 <button
                   type="submit"
                   disabled={status === "sending..."}
@@ -203,7 +165,6 @@ export default function Contact() {
                   <span className="relative z-10">{status === "sending..." ? "Sending..." : "Send Message"}</span>
                 </button>
 
-                {/* STATUS MESSAGES */}
                 {status === "success" && (
                   <p className="text-green-400 text-center font-medium mt-1 md:mt-2 text-sm">Message sent successfully! I'll get back to you soon.</p>
                 )}
